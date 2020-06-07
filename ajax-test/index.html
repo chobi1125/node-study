@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.
+min.js"></script>
+</head>
+  
+<body>
+  <header>
+    <div class="container">
+      <h1>空き席状況をチェック</h1>
+      <h2>JSONファイルの読み込み</h2>
+    </div><!-- /.container -->
+  </header>
+  <main>
+    <div class="container">
+      <section>
+        <ul class="list">
+          <li class="seminar" id="js">
+            <h2>JavaScript勉強会</h2>
+            <p class="check">空き席状況を確認</p>
+          </li>
+          <li class="seminar" id="security">
+            <h2>セキュリティ対策講座</h2>
+            <p class="check">空き席状況を確認</p>
+          </li>
+          <li class="seminar" id="aiux">
+            <h2>AIを利用したUX設計</h2>
+            <p class="check">空き席状況を確認</p>
+          </li>
+        </ul>
+      </section>
+    </div><!-- /.container -->
+  </main>
+  <footer>
+    <div class="container">
+      <p>JavaScript Samples</p>
+    </div><!-- /.container -->
+  </footer>
+  <script src="./jquery-3.4.1.min.js"></script>
+  <script>
+    'use strict';
+
+    $(document).ready(function () {
+      //ファイルの読み込み
+      $.ajax({ url: './data.json', dataType: 'json' })
+        .done(function (data) {
+          // data.forEach(function (item, index) {
+          //   console.log(item);
+          console.log(data);
+          // });
+        })
+        .fail(function () {
+          window.alert('読み込みエラー');
+        });
+    });
+  </script>
+</body>
+
+</html>

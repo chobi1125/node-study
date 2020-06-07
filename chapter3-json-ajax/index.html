@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.
+min.js"></script>
+</head>
+
+<body>
+  <form id="frm">
+    プロフィール：<select id="profiles">
+      <option></option>
+    </select>
+    <br>
+    フォーマット：<select id="formats">
+      <option value="json">JSON</option>
+    </select>
+    <br>
+    <br>
+    <div id="output"></div>
+  </form>
+  <textarea id="raw"></textarea>
+
+  <script>
+    $.get('http://localhost:8080/profiles', function (profile_names) {
+      $.each(profile_names, function (i, pname) {
+        $('#profiles').append('<option>' + pname + '</option>');
+      });
+    }, 'json');
+
+    $('#formats, #profiles').change(function () {
+      var format = $('#formats').val();
+      $.get('http://localhost:8080/profile/' + $('#profiles').val() + '.' + format, function (profile, stat, jqXHR) {
+        var cT = jqXHR.getResponseHeader('Content-Type');
+        $('#raw').val(profile);
+        $('#output').html('');
+        if (cT === 'application/json') {
+          $.each($.parseJSON(profile), function (k, v) {
+            $('#output').append('<b>' + k + '</b> : ' + v + '<br>');
+          });
+          return;
+        }
+      }, 'text');
+    });
+  </script>
+</body>
+
+</html>

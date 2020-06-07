@@ -1,6 +1,6 @@
 # 開発メモ
 
-contentディレクトリ
+📁content：server1.2で使ったファイル
 
-server1.2に連携
-
+※学習記録
+https://chobimusic.com/nodejs/
